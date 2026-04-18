@@ -8,8 +8,16 @@ const greetingEl = $("#greeting");
 const form = $("#contactForm");
 const formMsg = $("#formMessage");
 
+const visitorNameInput = $("#visitorName");
+const saveNameBtn = $("#saveNameBtn");
+const visitorMessage = $("#visitorMessage");
+
 const searchInput = $("#searchInput");
-const projects = $$(".project-card");
+const sortSelect = $("#sortSelect");
+const levelSelect = $("#levelSelect");
+const levelMessage = $("#levelMessage");
+const timerMessage = $("#timerMessage");
+const projectsContainer = $("#projectsContainer");
 const noResults = $("#noResults");
 
 const repoBtn = $("#repoBtn");
@@ -53,6 +61,42 @@ function updateThemeIcon() {
   themeBtn.textContent = isDark ? "☀️" : "🌙";
 }
 
+// ===== Visitor Name State Management =====
+function showVisitorName() {
+  if (!visitorMessage) return;
+
+  const savedName = localStorage.getItem("visitorName");
+
+  if (savedName) {
+    visitorMessage.textContent = `Welcome back, ${savedName}!`;
+    visitorMessage.style.color = "green";
+    if (visitorNameInput) {
+      visitorNameInput.value = savedName;
+    }
+  } else {
+    visitorMessage.textContent = "No name saved yet.";
+    visitorMessage.style.color = "black";
+  }
+}
+
+if (saveNameBtn) {
+  saveNameBtn.addEventListener("click", () => {
+    const name = visitorNameInput.value.trim();
+
+    if (!name) {
+      visitorMessage.textContent = "Please enter your name first.";
+      visitorMessage.style.color = "red";
+      return;
+    }
+
+    localStorage.setItem("visitorName", name);
+    visitorMessage.textContent = `Welcome back, ${name}!`;
+    visitorMessage.style.color = "green";
+  });
+}
+
+showVisitorName();
+
 // ===== Contact form with stronger checks =====
 if (form) {
   form.addEventListener("submit", (e) => {
@@ -92,27 +136,83 @@ if (form) {
   });
 }
 
-// ===== Search filter =====
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    const value = searchInput.value.toLowerCase().trim();
-    let visible = 0;
+// ===== Project Filter + Sort + Level Logic =====
+function updateProjects() {
+  if (!projectsContainer) return;
 
-    projects.forEach((project) => {
-      const text = project.getAttribute("data-project").toLowerCase();
+  const projectCards = Array.from(projectsContainer.querySelectorAll(".project-card"));
+  const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : "";
+  const sortValue = sortSelect ? sortSelect.value : "default";
+  const levelValue = levelSelect ? levelSelect.value : "all";
 
-      if (text.includes(value)) {
-        project.style.display = "block";
-        visible++;
-      } else {
-        project.style.display = "none";
-      }
-    });
+  if (sortValue === "name-asc") {
+    projectCards.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+  } else if (sortValue === "name-desc") {
+    projectCards.sort((a, b) => b.dataset.name.localeCompare(a.dataset.name));
+  } else if (sortValue === "year-new") {
+    projectCards.sort((a, b) => Number(b.dataset.year) - Number(a.dataset.year));
+  } else if (sortValue === "year-old") {
+    projectCards.sort((a, b) => Number(a.dataset.year) - Number(b.dataset.year));
+  }
 
-    if (noResults) {
-      noResults.style.display = visible === 0 ? "block" : "none";
+  projectCards.forEach((card) => {
+    projectsContainer.appendChild(card);
+  });
+
+  let visibleCount = 0;
+
+  projectCards.forEach((project) => {
+    const text = project.getAttribute("data-project").toLowerCase();
+    const level = project.getAttribute("data-level").toLowerCase();
+
+    const matchesSearch = text.includes(searchValue);
+    const matchesLevel = levelValue === "all" || level === levelValue;
+
+    if (matchesSearch && matchesLevel) {
+      project.style.display = "block";
+      visibleCount++;
+    } else {
+      project.style.display = "none";
     }
   });
+
+  if (noResults) {
+    noResults.style.display = visibleCount === 0 ? "block" : "none";
+  }
+
+  if (levelMessage) {
+    if (levelValue === "beginner") {
+      levelMessage.textContent = "Showing beginner-friendly projects.";
+    } else if (levelValue === "advanced") {
+      levelMessage.textContent = "Showing advanced-level projects.";
+    } else {
+      levelMessage.textContent = "Showing all projects.";
+    }
+  }
+}
+
+if (searchInput) {
+  searchInput.addEventListener("input", updateProjects);
+}
+
+if (sortSelect) {
+  sortSelect.addEventListener("change", updateProjects);
+}
+
+if (levelSelect) {
+  levelSelect.addEventListener("change", updateProjects);
+}
+
+updateProjects();
+
+// ===== Visitor Timer =====
+if (timerMessage) {
+  let secondsOnSite = 0;
+
+  setInterval(() => {
+    secondsOnSite++;
+    timerMessage.textContent = `You have been on this site for ${secondsOnSite} seconds.`;
+  }, 1000);
 }
 
 // ===== GitHub API Feature =====

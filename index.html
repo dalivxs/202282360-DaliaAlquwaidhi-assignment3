@@ -30,6 +30,16 @@
         <a href="#projects" class="btn">View Projects</a>
     </section>
 
+    <section class="section">
+        <h2>Visitor Name</h2>
+        <div class="search-box">
+            <label for="visitorName">Enter your name:</label>
+            <input type="text" id="visitorName" placeholder="Type your name" />
+            <button id="saveNameBtn" class="btn" type="button">Save Name</button>
+            <p id="visitorMessage"></p>
+        </div>
+    </section>
+
     <section id="about" class="section">
         <h2>About Me</h2>
         <p>
@@ -49,34 +59,74 @@
                 placeholder="Search projects..."
                 aria-label="Search projects"
             />
-            <p id="noResults" class="no-results" style="display: none;">No projects found.</p>
         </div>
 
-        <div class="project-card" data-project="lost found platform campus reporting moderation web project 2025">
-            <img src="assets/images/project1-placeholder.png" alt="Lost and Found Project Image">
-            <h3>KFUPM Lost & Found Platform</h3>
-            <p>
-                A campus web platform that allows students to report lost and found items,
-                search by location or category, and securely communicate through the system.
-                Includes moderation features for reviewing and approving submissions.
-            </p>
-            <div class="project-buttons">
-                <a href="#" class="btn">Live</a>
-                <a href="https://github.com/dalivxs/202282360-DaliaAlquwaidhi-assignment1" class="btn-outline">Code</a>
+        <div class="search-box">
+            <label for="sortSelect">Sort projects:</label>
+            <select id="sortSelect" aria-label="Sort projects">
+                <option value="default">Default order</option>
+                <option value="name-asc">Name A to Z</option>
+                <option value="name-desc">Name Z to A</option>
+                <option value="year-new">Newest first</option>
+                <option value="year-old">Oldest first</option>
+            </select>
+        </div>
+
+        <div class="search-box">
+            <label for="levelSelect">Project level:</label>
+            <select id="levelSelect" aria-label="Choose project level">
+                <option value="all">All Projects</option>
+                <option value="beginner">Beginner</option>
+                <option value="advanced">Advanced</option>
+            </select>
+            <p id="levelMessage"></p>
+        </div>
+
+        <div class="search-box">
+            <p id="timerMessage">You have been on this site for 0 seconds.</p>
+        </div>
+
+        <p id="noResults" class="no-results" style="display: none;">No projects found.</p>
+
+        <div id="projectsContainer">
+            <div
+                class="project-card"
+                data-project="lost found platform campus reporting moderation web project 2025 beginner"
+                data-name="KFUPM Lost & Found Platform"
+                data-year="2025"
+                data-level="beginner"
+            >
+                <img src="assets/images/project1-placeholder.png" alt="Lost and Found Project Image">
+                <h3>KFUPM Lost & Found Platform</h3>
+                <p>
+                    A campus web platform that allows students to report lost and found items,
+                    search by location or category, and securely communicate through the system.
+                    Includes moderation features for reviewing and approving submissions.
+                </p>
+                <div class="project-buttons">
+                    <a href="#" class="btn">Live</a>
+                    <a href="https://github.com/dalivxs/202282360-DaliaAlquwaidhi-assignment1" class="btn-outline">Code</a>
+                </div>
             </div>
-        </div>
 
-        <div class="project-card" data-project="events hub university schedules registration feedback uml sdlc web project 2024">
-            <img src="assets/images/project2-placeholder.png" alt="Events Hub Project Image">
-            <h3>KFUPM Events Hub</h3>
-            <p>
-                A centralized web application concept for organizing university events.
-                Features include event categories, schedules, registration management,
-                and feedback collection. Designed using UML modeling and structured SDLC practices.
-            </p>
-            <div class="project-buttons">
-                <a href="#" class="btn">Live</a>
-                <a href="https://github.com/dalivxs/202282360-DaliaAlquidhi-assignment1" class="btn-outline">Code</a>
+            <div
+                class="project-card"
+                data-project="events hub university schedules registration feedback uml sdlc web project 2024 advanced"
+                data-name="KFUPM Events Hub"
+                data-year="2024"
+                data-level="advanced"
+            >
+                <img src="assets/images/project2-placeholder.png" alt="Events Hub Project Image">
+                <h3>KFUPM Events Hub</h3>
+                <p>
+                    A centralized web application concept for organizing university events.
+                    Features include event categories, schedules, registration management,
+                    and feedback collection. Designed using UML modeling and structured SDLC practices.
+                </p>
+                <div class="project-buttons">
+                    <a href="#" class="btn">Live</a>
+                    <a href="https://github.com/dalivxs/202282360-DaliaAlquwaidhi-assignment1" class="btn-outline">Code</a>
+                </div>
             </div>
         </div>
     </section>
