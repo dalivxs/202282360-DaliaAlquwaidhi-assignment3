@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dalia Alquwaidhi | Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+<header class="header">
+    <nav class="nav">
+        <h2 class="logo">Dalia</h2>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="themeBtn" type="button">🌙</button>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <p id="greeting"></p>
+        <h1>Hello, I'm Dalia Alquwaidhi</h1>
+        <p>Building clean, structured, and user-friendly web applications.</p>
+        <a href="#projects" class="btn">View Projects</a>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <p>
+            I am a Software Engineering student passionate about building practical,
+            well-structured web applications. I enjoy transforming ideas into clean
+            interfaces and improving user experience through responsive design.
+        </p>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search projects..."
+                aria-label="Search projects"
+            />
+            <p id="noResults" class="no-results" style="display: none;">No projects found.</p>
+        </div>
+
+        <div class="project-card" data-project="lost found platform campus reporting moderation">
+            <img src="assets/images/project1-placeholder.png" alt="Lost and Found Project Image">
+            <h3>KFUPM Lost & Found Platform</h3>
+            <p>
+                A campus web platform that allows students to report lost and found items,
+                search by location or category, and securely communicate through the system.
+                Includes moderation features for reviewing and approving submissions.
+            </p>
+            <div class="project-buttons">
+                <a href="#" class="btn">Live</a>
+                <a href="https://github.com/dalivxs/202282360-DaliaAlquwaidhi-assignment1" class="btn-outline">Code</a>
+            </div>
+        </div>
+
+        <div class="project-card" data-project="events hub university schedules registration feedback uml sdlc">
+            <img src="assets/images/project2-placeholder.png" alt="Events Hub Project Image">
+            <h3>KFUPM Events Hub</h3>
+            <p>
+                A centralized web application concept for organizing university events.
+                Features include event categories, schedules, registration management,
+                and feedback collection. Designed using UML modeling and structured SDLC practices.
+            </p>
+            <div class="project-buttons">
+                <a href="#" class="btn">Live</a>
+                <a href="https://github.com/dalivxs/202282360-DaliaAlquwaidhi-assignment1" class="btn-outline">Code</a>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <form id="contactForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Write your message..." required></textarea>
+
+            <button type="submit" class="btn">Send Message</button>
+            <p id="formMessage"></p>
+        </form>
+    </section>
+
+</main>
+
+<script src="js/script.js"></script>
+</body>
+</html>
